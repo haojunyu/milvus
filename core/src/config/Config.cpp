@@ -42,6 +42,7 @@ namespace server {
 const char* CONFIG_NODE_DELIMITER = ".";
 const char* CONFIG_VERSION = "version";
 
+/* 配置文件变量定义 */
 /* cluster config */
 const char* CONFIG_CLUSTER = "cluster";
 const char* CONFIG_CLUSTER_ENABLE = "enable";

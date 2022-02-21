@@ -19,6 +19,7 @@
 namespace milvus {
 namespace server {
 
+/* 抽象类ConfigMgr,只要有一個函数是纯虚函数，接口的角色 */
 class ConfigMgr {
  public:
     virtual Status

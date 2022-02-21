@@ -124,9 +124,9 @@ main(int argc, char* argv[]) {
         }
     }
 
-    /* Handle Signal */
+    /* Handle Signal 处理信号 */
     signal(SIGHUP, milvus::server::SignalUtil::HandleSignal);
-    signal(SIGINT, milvus::server::SignalUtil::HandleSignal);
+    signal(SIGINT, milvus::server::SignalUtil::HandleSignal);   // 中断信号， ctrl-c
     signal(SIGUSR1, milvus::server::SignalUtil::HandleSignal);
     signal(SIGSEGV, milvus::server::SignalUtil::HandleSignal);
     signal(SIGUSR2, milvus::server::SignalUtil::HandleSignal);

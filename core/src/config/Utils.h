@@ -16,6 +16,7 @@
 namespace milvus {
 namespace server {
 
+/* 解析 b，B，KB，MB，GB */
 int64_t
 parse_bytes(const std::string& str, std::string& err);
 

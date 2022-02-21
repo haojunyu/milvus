@@ -17,6 +17,7 @@
 namespace milvus {
 namespace server {
 
+/* ConfigHandler 是 CacheConfigHandler 的虛基类，避免二义性 */
 class CacheConfigHandler : virtual public ConfigHandler {
  public:
     CacheConfigHandler();

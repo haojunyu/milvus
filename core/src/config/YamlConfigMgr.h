@@ -20,6 +20,7 @@
 namespace milvus {
 namespace server {
 
+/* YamlConfigMgr 是 ConfigMgr 的一种实现*/
 class YamlConfigMgr : public ConfigMgr {
  public:
     static ConfigMgr*

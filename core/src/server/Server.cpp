@@ -57,6 +57,8 @@ Server::Init(int64_t daemonized, const std::string& pid_filename, const std::str
     config_filename_ = config_filename;
 }
 
+// fork两次，并创建pid文件写入实际pid
+// TODO: 为何要fork两次？
 void
 Server::Daemonize() {
     if (daemonized_ == 0) {
