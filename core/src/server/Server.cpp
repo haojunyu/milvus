@@ -150,7 +150,7 @@ Server::Start() {
     }
 
     try {
-        /* Read config file */
+        /* Read config file 加載配置文件*/
         Status s = LoadConfig();
         if (!s.ok()) {
             std::cerr << "ERROR: Milvus server fail to load config file" << std::endl;
@@ -158,7 +158,7 @@ Server::Start() {
         }
 
         Config& config = Config::GetInstance();
-
+        /* 获取元数据存储位置 SQLite/MySQL */
         std::string meta_uri;
         STATUS_CHECK(config.GetGeneralConfigMetaURI(meta_uri));
         if (meta_uri.length() > 6 && strcasecmp("sqlite", meta_uri.substr(0, 6).c_str()) == 0) {
@@ -167,13 +167,14 @@ Server::Start() {
                       << std::endl;
         }
 
-        /* Init opentracing tracer from config */
+        /* Init opentracing tracer from config 根据配置初始化跟踪器*/
         std::string tracing_config_path;
         s = config.GetTracingConfigJsonConfigPath(tracing_config_path);
         tracing_config_path.empty() ? tracing::TracerUtil::InitGlobal()
                                     : tracing::TracerUtil::InitGlobal(tracing_config_path);
 
         /* log path is defined in Config file, so InitLog must be called after LoadConfig */
+        /* 获取服务器时区 */
         std::string time_zone;
         s = config.GetGeneralConfigTimezone(time_zone);
         if (!s.ok()) {
@@ -198,7 +199,7 @@ Server::Start() {
             return Status(SERVER_UNEXPECTED_ERROR, "Fail to setenv");
         }
         tzset();
-
+        /* 初始化日志 */
         {
             std::unordered_map<std::string, int64_t> level_to_int{
                 {"debug", 5}, {"info", 4}, {"warning", 3}, {"error", 2}, {"fatal", 1},

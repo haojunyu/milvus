@@ -13,3 +13,26 @@ cmake --version # 3.14.3
 # 编译
 cd /data/core && ./build.sh -t Release
 ```
+
+
+依赖的c++库
+
+* GTest
+* MySQLPP
+* Prometheus
+* SQLite
+* yaml-cpp  处理yaml配置文件
+* libunwind
+* gperftools
+* GRPC
+* ZLIB
+* Opentracing 分布式链路跟踪
+* fiu  libfiu是一个故障注入的C库。它提供用于标识“故障点”（“核心API”）里面的代码，功能启用/禁用这些点的失败（“控制API”）。
+* AWS
+* oatpp
+* armadillo
+* json https://github.com/nlohmann/json
+* logging 
+
+
+
