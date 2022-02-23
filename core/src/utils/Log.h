@@ -22,7 +22,7 @@ namespace milvus {
  * and LOG_MODULE_LEVEL_ macro in other functions.
  */
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////服务日志格式///////////////////////////////////////////////
 #define SERVER_MODULE_NAME "SERVER"
 #define SERVER_MODULE_CLASS_FUNCTION \
     LogOut("[%s][%s::%s][%s] ", SERVER_MODULE_NAME, (typeid(*this).name()), __FUNCTION__, GetThreadName().c_str())

@@ -253,6 +253,7 @@ Server::Start() {
         // std::string deploy_mode;
         // STATUS_CHECK(config.GetServerConfigDeployMode(deploy_mode));
 
+        // 单机或者集群写节点做的事: 数据库目录，wal日志目录
         // if (deploy_mode == "single" || deploy_mode == "cluster_writable") {
         if ((not cluster_enable) || cluster_role == "rw") {
             std::string db_path;
@@ -317,6 +318,7 @@ Server::Start() {
         LogCpuInfo();
         LogConfigInMem();
 
+        /* 监控实例初始化 */
         server::Metrics::GetInstance().Init();
         server::SystemInfo::GetInstance().Init();
 
@@ -392,12 +394,14 @@ Server::LoadConfig() {
 Status
 Server::StartService() {
     Status stat;
+    /* engine::KnowhereResource 支持annoy,faiss,hnswlib,sptag等多种引擎 */
     stat = engine::KnowhereResource::Initialize();
     if (!stat.ok()) {
         LOG_SERVER_ERROR_ << "KnowhereResource initialize fail: " << stat.message();
         goto FAIL;
     }
 
+    /* 定时服务 */
     scheduler::StartSchedulerService();
 
     stat = DBWrapper::GetInstance().StartService();
@@ -406,6 +410,7 @@ Server::StartService() {
         goto FAIL;
     }
 
+    /* 启动grpc和http服务 */
     grpc::GrpcServer::GetInstance().Start();
     web::WebServer::GetInstance().Start();
 
